@@ -1,4 +1,4 @@
-import { about, quotes, products, photos, contact, socials, companies, experience, writing } from "./data";
+import { about, quotes, products, photos, contact, socials, companies, writing } from "./data";
 import { Clock, Weather, ThemeToggle, NowPlaying } from "./Live";
 
 export default function Home() {
@@ -74,22 +74,6 @@ export default function Home() {
         <section className="section">
           <h2>Quotes I live by</h2>
           <div className="quotes">{quotes.map((q) => <p key={q}>"{q}"</p>)}</div>
-        </section>
-
-        <section className="section" id="experience">
-          <h2>Experience</h2>
-          <div className="xlist">
-            {experience.map((x) => (
-              <div key={x.co} className="xrow">
-                <img src={x.logo} alt="" />
-                <div>
-                  <p className="xrole">{x.role} <span>· {x.co}</span></p>
-                  <p className="xnote">{x.note}</p>
-                </div>
-                <span className="xyears">{x.years}</span>
-              </div>
-            ))}
-          </div>
         </section>
 
         <section className="section" id="photos">
