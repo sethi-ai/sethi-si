@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Links — Akshay Sethi</title>
+  <meta name="description" content="Gear I use, gadgets I love — curated by Akshay Sethi." />
+  <meta property="og:title" content="Links — Akshay Sethi" />
+  <meta property="og:url" content="https://sethi.si/links" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #F5F5F0;
+      --text:      #111111;
+      --muted:     #888888;
+      --faint:     #BBBBBB;
+      --divider:   #E4E4DE;
+      --orange:    #F47A1F;
+      --orange-bg: rgba(244, 122, 31, 0.07);
+      --serif:     'Playfair Display', Georgia, serif;
+      --sans:      'Inter', system-ui, sans-serif;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg:        #111111;
+        --text:      #F0F0EB;
+        --muted:     #888888;
+        --faint:     #555555;
+        --divider:   #2A2A2A;
+        --orange-bg: rgba(244, 122, 31, 0.1);
+      }
+    }
+
+    html, body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .wrap {
+      max-width: 420px;
+      margin: 0 auto;
+      padding: 56px 24px 72px;
+    }
+
+    /* ── Header ── */
+    .back {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      color: var(--faint);
+      margin-bottom: 32px;
+      transition: color 0.12s;
+    }
+    .back:hover { color: var(--orange); }
+
+    .page-title {
+      font-family: var(--serif);
+      font-size: 28px;
+      font-weight: 400;
+      letter-spacing: -0.4px;
+      line-height: 1.2;
+      margin-bottom: 10px;
+    }
+
+    .page-title span { color: var(--orange); }
+
+    .page-sub {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 4px;
+    }
+
+    /* ── Sections ── */
+    .section { margin-top: 40px; }
+
+    .label {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--faint);
+      margin-bottom: 12px;
+    }
+
+    /* ── Link list ── */
+    .links { list-style: none; }
+
+    .links li {
+      border-top: 1px solid var(--divider);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .links li:last-child { border-bottom: 1px solid var(--divider); }
+
+    .links li::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 3px;
+      background: var(--orange);
+      transform: scaleY(0);
+      transform-origin: center;
+      transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      border-radius: 0 2px 2px 0;
+    }
+
+    .links li:hover::before { transform: scaleY(1); }
+
+    .links a {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 12px;
+      padding: 11px 0;
+      cursor: pointer;
+      background: transparent;
+      transition: background 0.18s ease, padding-left 0.18s ease;
+    }
+
+    .links li:hover > a {
+      background: var(--orange-bg);
+      padding-left: 12px;
+    }
+
+    /* Icon */
+    .link-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 7px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: transform 0.18s ease;
+      font-size: 18px;
+      line-height: 1;
+    }
+
+    .links li:hover .link-icon { transform: scale(1.08); }
+    .link-icon svg { width: 14px; height: 14px; fill: #fff; }
+
+    /* Number badge */
+    .link-num {
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--faint);
+      min-width: 16px;
+      flex-shrink: 0;
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* Text */
+    .link-left {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .link-title {
+      font-size: 14px;
+      color: var(--text);
+      font-weight: 400;
+      transition: color 0.15s;
+    }
+
+    .link-caption {
+      font-size: 12px;
+      color: var(--faint);
+      transition: color 0.15s;
+    }
+
+    .links li:hover .link-title { color: var(--orange); }
+    .links li:hover .link-caption { color: var(--orange); opacity: 0.7; }
+
+    /* Arrow */
+    .link-arrow {
+      font-size: 14px;
+      color: var(--faint);
+      transition: color 0.12s, transform 0.15s;
+      flex-shrink: 0;
+    }
+
+    .links li:hover .link-arrow {
+      color: var(--orange);
+      transform: translateX(3px);
+    }
+
+    /* Mobile tap */
+    @media (hover: none) {
+      .links li:active > a {
+        background: rgba(244,122,31,0.08);
+        padding-left: 8px;
+      }
+    }
+
+    /* ── Footer ── */
+    .footer {
+      margin-top: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer-back {
+      font-size: 12px;
+      color: var(--faint);
+      transition: color 0.12s;
+    }
+
+    .footer-back:hover { color: var(--orange); }
+
+    .footer-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--orange);
+      opacity: 0.4;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+
+    <!-- Back -->
+    <a href="https://sethi.si/me" class="back">← sethi.si/me</a>
+
+    <!-- Header -->
+    <h1 class="page-title">Things I <span>use</span> &amp; love</h1>
+    <p class="page-sub">Gear I actually use. Gadgets I genuinely like. No fluff — just what's on my desk and in my bag.</p>
+
+    <!-- GEAR I USE -->
+    <section class="section">
+      <p class="label">Gear I Use</p>
+      <ul class="links">
+
+        <li>
+          <a href="#" target="_blank" rel="noreferrer">
+            <div class="link-icon" style="background:#2A2A2A;">
+              <svg viewBox="0 0 24 24"><path d="M17 1.01L7 1c-1.1 0-1.99.9-1.99 2v18c0 1.1.89 2 1.99 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-1.99-2-1.99zM17 19H7V5h10v14z"/></svg>
+            </div>
+            <div class="link-left">
+              <span class="link-title">iPhone 16 Pro</span>
+              <span class="link-caption">Daily driver — camera is insane</span>
+            </div>
+            <span class="link-arrow">→</span>
+          </a>
+        </li>
+
+        <li>
+          <a href="#" target="_blank" rel="noreferrer">
+            <div class="link-icon" style="background:#2A2A2A;">
+              <svg viewBox="0 0 24 24"><path d="M18 7c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2v-3l4 4V7l-4 4V7z"/></svg>
+            </div>
+            <div class="link-left">
+              <span class="link-title">DJI Osmo Pocket 3 Creator Combo</span>
+              <span class="link-caption">Best pocket camera I've owned</span>
+            </div>
+            <span class="link-arrow">→</span>
+          </a>
+        </li>
+
+        <li>
+          <a href="#" target="_blank" rel="noreferrer">
+            <div class="link-icon" style="background:#2A2A2A;">
+              <svg viewBox="0 0 24 24"><path d="M17 1.01L7 1c-1.1 0-1.99.9-1.99 2v18c0 1.1.89 2 1.99 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-1.99-2-1.99zM17 19H7V5h10v14z"/></svg>
+            </div>
+            <div class="link-left">
+              <span class="link-title">Google Pixel 6a</span>
+              <span class="link-caption">Secondary phone — surprisingly good</span>
+            </div>
+            <span class="link-arrow">→</span>
+          </a>
+        </li>
+
+        <li>
+          <a href="#" target="_blank" rel="noreferrer">
+            <div class="link-icon" style="background:#2A2A2A;">
+              <svg viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9v7c0 1.1.9 2 2 2h4v-8H5v-1c0-3.87 3.13-7 7-7s7 3.13 7 7v1h-4v8h4c1.1 0 2-.9 2-2v-7c0-4.97-4.03-9-9-9z"/></svg>
+            </div>
+            <div class="link-left">
+              <span class="link-title">DJI Mic 2</span>
+              <span class="link-caption">Wireless mic — plug and play</span>
+            </div>
+            <span class="link-arrow">→</span>
+          </a>
+        </li>
+
+        <li>
+          <a href="#" target="_blank" rel="noreferrer">
+            <div class="link-icon" style="background:#2A2A2A;">
+              <svg viewBox="0 0 24 24"><path d="M21 6H3c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-10 7H8v3H6v-3H3v-2h3V8h2v3h3v2zm4.5 2c-.83 0-1.5-.67-1.5-1.5v-5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5zm4 0c-.83 0-1.5-.67-1.5-1.5v-5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5z"/></svg>
+            </div>
+            <div class="link-left">
+              <span class="link-title">TrimUI Brick</span>
+              <span class="link-caption">Retro handheld — nostalgia hit</span>
+            </div>
+            <span class="link-arrow">→</span>
+          </a>
+        </li>
+
+        <li>
+          <a href="#" target="_blank" rel="noreferrer">
+            <div class="link-icon" style="background:#2A2A2A;">
+              <svg viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9v7c0 1.1.9 2 2 2h4v-8H5v-1c0-3.87 3.13-7 7-7s7 3.13 7 7v1h-4v8h4c1.1 0 2-.9 2-2v-7c0-4.97-4.03-9-9-9z"/></svg>
+            </div>
+            <div class="link-left">
+              <span class="link-title">AirPods Pro 2</span>
+              <span class="link-caption">ANC is unreal — daily use</span>
+            </div>
+            <span class="link-arrow">→</span>
+          </a>
+        </li>
+
+      </ul>
+    </section>
+
+    <!-- GADGETS I LOVE -->
+    <section class="section">
+      <p class="label">Gadgets I Love</p>
+      <ul class="links">
+
+        <li>
+          <a href="#" target="_blank" rel="noreferrer">
+            <div class="link-icon" style="background:#2A2A2A;">
+              <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+            </div>
+            <div class="link-left">
+              <span class="link-title">Tapo Hub</span>
+              <span class="link-caption">Smart home command centre</span>
+            </div>
+            <span class="link-arrow">→</span>
+          </a>
+        </li>
+
+        <li>
+          <a href="#" target="_blank" rel="noreferrer">
+            <div class="link-icon" style="background:#2A2A2A;">
+              <svg viewBox="0 0 24 24"><path d="M17 7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h10c2.76 0 5-2.24 5-5s-2.24-5-5-5zm0 8c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3z"/></svg>
+            </div>
+            <div class="link-left">
+              <span class="link-title">Tapo Switch</span>
+              <span class="link-caption">Smart switch — retrofits anything</span>
+            </div>
+            <span class="link-arrow">→</span>
+          </a>
+        </li>
+
+        <li>
+          <a href="#" target="_blank" rel="noreferrer">
+            <div class="link-icon" style="background:#2A2A2A;">
+              <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            </div>
+            <div class="link-left">
+              <span class="link-title">Tapo Smart Bulbs</span>
+              <span class="link-caption">Colour, schedule, voice control</span>
+            </div>
+            <span class="link-arrow">→</span>
+          </a>
+        </li>
+
+        <li>
+          <a href="#" target="_blank" rel="noreferrer">
+            <div class="link-icon" style="background:#2A2A2A;">
+              <svg viewBox="0 0 24 24"><path d="M19 8H5c-1.66 0-3 1.34-3 3v6h4v4h12v-4h4v-6c0-1.66-1.34-3-3-3zm-3 11H8v-5h8v5zm3-7c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm-1-9H6v4h12V3z"/></svg>
+            </div>
+            <div class="link-left">
+              <span class="link-title">Seznik Nano X Printer</span>
+              <span class="link-caption">Pocket thermal printer — addictive</span>
+            </div>
+            <span class="link-arrow">→</span>
+          </a>
+        </li>
+
+      </ul>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <a href="https://sethi.si/me" class="footer-back">← back to /me</a>
+      <div class="footer-dot"></div>
+    </footer>
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+  <script>
+    window.addEventListener('load', function () {
+      confetti({
+        particleCount: 80,
+        spread: 70,
+        origin: { y: 0.2 },
+        colors: ['#F47A1F', '#111111', '#F5F5F0', '#FFFFFF', '#F47A1F'],
+        scalar: 0.9,
+        gravity: 1.2,
+        ticks: 200
+      });
+    });
+  </script>
+
+</body>
+</html>

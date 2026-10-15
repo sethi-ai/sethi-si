@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Akshay Sethi &mdash; Portfolio</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+PHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiByeD0iNiIgZmlsbD0iI0Y0N0ExRiIvPjx0ZXh0IHg9IjUwJSIgeT0iMjIiIGZvbnQtZmFtaWx5PSJBcmlhbCBCbGFjayxzYW5zLXNlcmlmIiBmb250LXNpemU9IjEzIiBmb250LXdlaWdodD0iOTAwIiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+QWkuPC90ZXh0Pjwvc3ZnPg==">
+<meta name="description" content="Portfolio of Akshay Sethi — PMM, AI Builder, Growth Marketer.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --orange: #F47A1F;
+    --black: #111111;
+    --charcoal: #2A2A2A;
+    --light-grey: #F5F5F5;
+    --text-muted: #666;
+    --bg: #ffffff;
+    --border: #EEEEEE;
+    --border-mid: #E0E0E0;
+  }
+  body.dark {
+    --black: #F0F0F0; --charcoal: #CCCCCC;
+    --light-grey: #1E1E1E; --text-muted: #999; --bg: #0F0F0F;
+    --border: #2A2A2A; --border-mid: #333;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--black); line-height: 1.6; transition: background 0.3s ease, color 0.3s ease; }
+
+  .outer { display: flex; min-height: 100vh; }
+
+  /* SIDEBAR — desktop only */
+  .sidebar { display: none; }
+
+  /* MAIN */
+  .main { flex: 1; padding: 28px 24px 80px; max-width: 720px; margin: 0 auto; width: 100%; }
+
+  /* NAV */
+  .topnav { display: flex; justify-content: space-between; align-items: center; margin-bottom: 36px; padding-right: 52px; }
+  .back-link { font-size: 13px; color: var(--text-muted); text-decoration: none; display: flex; align-items: center; gap: 6px; }
+  .back-link:hover { color: var(--orange); }
+
+  /* HERO */
+  .hero { margin-bottom: 44px; }
+  .hero-label { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--orange); margin-bottom: 10px; }
+  .hero-title { font-family: 'Anton', sans-serif; font-size: 38px; line-height: 1.05; margin-bottom: 12px; }
+  .hero-title span { color: var(--orange); }
+  .hero-sub { font-size: 14px; color: var(--text-muted); max-width: 480px; line-height: 1.7; }
+
+  /* SECTION */
+  .section { margin-bottom: 44px; opacity: 1; transform: translateY(0); transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.16,1,0.3,1); }
+  .section.hidden { opacity: 0; transform: translateY(20px); }
+  .section-title { font-family: 'Anton', sans-serif; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--orange); margin-bottom: 18px; display: flex; align-items: center; gap: 10px; }
+  .section-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+  /* PROJECT CARDS */
+  .projects-grid { display: flex; flex-direction: column; gap: 14px; }
+  .project-card { border: 1px solid var(--border-mid); border-radius: 10px; padding: 20px; transition: border-color 0.2s ease, transform 0.2s ease; position: relative; overflow: hidden; }
+  .project-card:hover { border-color: var(--orange); transform: translateY(-2px); }
+  .project-card::before { content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 100%; background: var(--orange); opacity: 0; transition: opacity 0.2s ease; }
+  .project-card:hover::before { opacity: 1; }
+  .project-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 6px; }
+  .project-name { font-family: 'Anton', sans-serif; font-size: 20px; color: var(--black); }
+  .project-stage { font-size: 10px; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; padding: 3px 9px; border-radius: 20px; }
+  .stage-prototype { background: rgba(244,122,31,0.1); color: var(--orange); border: 1px solid rgba(244,122,31,0.2); }
+  .stage-building { background: var(--light-grey); color: var(--text-muted); border: 1px solid var(--border-mid); }
+  .project-type { font-size: 12px; color: var(--text-muted); margin-bottom: 10px; font-weight: 500; }
+  .project-desc { font-size: 13px; color: var(--charcoal); line-height: 1.65; margin-bottom: 12px; }
+  .project-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .ptag { font-size: 11px; background: var(--light-grey); border: 1px solid var(--border-mid); color: var(--text-muted); padding: 3px 9px; border-radius: 20px; font-weight: 500; }
+  .project-link { display: inline-flex; align-items: center; gap: 5px; font-size: 12px; font-weight: 600; color: var(--orange); text-decoration: none; margin-top: 12px; border-bottom: 1px solid rgba(244,122,31,0.3); padding-bottom: 1px; }
+  .project-link:hover { border-color: var(--orange); }
+
+  /* CASE STUDIES */
+  .case-list { display: flex; flex-direction: column; border: 1px solid var(--border-mid); border-radius: 10px; overflow: hidden; }
+  .case-item { border-bottom: 1px solid var(--border); }
+  .case-item:last-child { border-bottom: none; }
+  .case-header { display: flex; justify-content: space-between; align-items: center; padding: 18px 20px; cursor: pointer; transition: background 0.15s ease; user-select: none; }
+  .case-header:hover { background: var(--light-grey); }
+  .case-left { display: flex; flex-direction: column; gap: 3px; }
+  .case-title { font-size: 14px; font-weight: 600; color: var(--black); }
+  .case-meta { font-size: 12px; color: var(--text-muted); }
+  .case-right { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+  .case-badge { font-size: 10px; font-weight: 700; letter-spacing: 0.6px; text-transform: uppercase; padding: 3px 8px; border-radius: 20px; }
+  .badge-done { background: rgba(0,200,83,0.1); color: #00A854; border: 1px solid rgba(0,200,83,0.2); }
+  .badge-soon { background: var(--light-grey); color: var(--text-muted); border: 1px solid var(--border-mid); }
+  .case-chevron { font-size: 11px; color: var(--text-muted); transition: transform 0.25s ease; }
+  .case-item.open .case-chevron { transform: rotate(180deg); }
+  .case-body { display: none; padding: 0 20px 20px; }
+  .case-item.open .case-body { display: block; }
+  .case-coming { font-size: 13px; color: var(--text-muted); font-style: italic; padding-top: 14px; border-top: 1px solid var(--border); }
+
+  /* SKILLS */
+  .skills-grid { display: flex; flex-direction: column; gap: 14px; }
+  .skill-row { display: flex; flex-direction: column; gap: 6px; }
+  .skill-label { font-size: 11px; color: var(--orange); font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .stag { background: var(--light-grey); border: 1px solid var(--border-mid); color: var(--charcoal); padding: 4px 11px; border-radius: 20px; font-size: 12px; font-weight: 500; }
+
+  /* AVAILABLE */
+  .available-bar { margin-top: 44px; background: var(--black); border-radius: 12px; padding: 26px 28px; display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; }
+  body.dark .available-bar { background: #1A1A1A; border: 1px solid var(--border-mid); }
+  .available-left { display: flex; flex-direction: column; gap: 5px; }
+  .available-dot { display: flex; align-items: center; gap: 8px; }
+  .dot-pulse { width: 8px; height: 8px; border-radius: 50%; background: #00C853; flex-shrink: 0; animation: pulse 2s infinite; }
+  @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(0,200,83,0.4); } 70% { box-shadow: 0 0 0 8px rgba(0,200,83,0); } 100% { box-shadow: 0 0 0 0 rgba(0,200,83,0); } }
+  .available-status { font-size: 12px; color: #00C853; font-weight: 600; }
+  .available-title { font-family: 'Anton', sans-serif; font-size: 22px; color: #fff; }
+  .available-sub { font-size: 13px; color: rgba(255,255,255,0.5); }
+  .available-btns { display: flex; gap: 10px; flex-wrap: wrap; }
+  .avail-btn { display: inline-flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 600; padding: 10px 18px; border-radius: 6px; text-decoration: none; transition: all 0.15s ease; font-family: 'Inter', sans-serif; border: none; cursor: pointer; }
+  .avail-btn.primary { background: var(--orange); color: #fff; }
+  .avail-btn.primary:hover { opacity: 0.88; }
+  .avail-btn.ghost { background: rgba(255,255,255,0.1); color: #fff; border: 1px solid rgba(255,255,255,0.2); }
+  .avail-btn.ghost:hover { background: rgba(255,255,255,0.18); }
+
+  /* FOOTER */
+  .portfolio-footer { margin-top: 40px; padding-top: 16px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; font-size: 11px; color: var(--text-muted); }
+  .portfolio-footer a { color: var(--orange); text-decoration: none; }
+
+  /* TOGGLE */
+  #theme-toggle { position: fixed; top: 20px; right: 20px; width: 38px; height: 38px; border-radius: 50%; border: 1.5px solid #CCCCCC; background: #F0F0F0; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 17px; z-index: 9999; outline: none; box-shadow: 0 1px 6px rgba(0,0,0,0.12); transition: all 0.2s ease; }
+  body.dark #theme-toggle { background: #2A2A2A; border-color: #555; }
+  #theme-toggle:hover { border-color: #F47A1F; transform: scale(1.06); }
+
+  /* =================== DESKTOP =================== */
+  @media (min-width: 900px) {
+    .outer { display: grid; grid-template-columns: 240px 1fr; min-height: 100vh; }
+
+    .sidebar {
+      display: flex;
+      flex-direction: column;
+      padding: 36px 24px;
+      border-right: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+      background: var(--light-grey);
+    }
+    body.dark .sidebar { background: #0A0A0A; }
+
+    .sidebar-name { font-family: 'Anton', sans-serif; font-size: 20px; line-height: 1.1; margin-bottom: 3px; }
+    .sidebar-name span { color: var(--orange); }
+    .sidebar-role { font-size: 11px; color: var(--text-muted); margin-bottom: 20px; line-height: 1.5; }
+    .sidebar-divider { height: 1px; background: var(--border); margin: 14px 0; }
+    .sidebar-label { font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--orange); margin-bottom: 8px; }
+
+    .sidebar-nav { display: flex; flex-direction: column; gap: 2px; }
+    .sidebar-nav a { font-size: 13px; color: var(--text-muted); text-decoration: none; padding: 7px 8px; border-radius: 6px; transition: all 0.15s; border-left: 2px solid transparent; }
+    .sidebar-nav a:hover { color: var(--black); background: var(--border); border-left-color: var(--orange); }
+
+    .sidebar-pages { display: flex; flex-direction: column; gap: 2px; }
+    .sidebar-pages a { font-size: 13px; color: var(--text-muted); text-decoration: none; padding: 7px 8px; border-radius: 6px; transition: all 0.15s; display: flex; align-items: center; gap: 7px; }
+    .sidebar-pages a:hover { color: var(--black); background: var(--border); }
+    .sidebar-pages a svg { width: 12px; height: 12px; opacity: 0.5; }
+
+    .sidebar-avail { margin-top: auto; padding: 12px; background: var(--bg); border: 1px solid var(--border-mid); border-radius: 8px; }
+    body.dark .sidebar-avail { background: #1A1A1A; }
+    .avail-row { display: flex; align-items: center; gap: 6px; margin-bottom: 4px; }
+    .avail-dot { width: 7px; height: 7px; border-radius: 50%; background: #00C853; animation: pulse 2s infinite; flex-shrink: 0; }
+    .avail-text { font-size: 11px; color: #00C853; font-weight: 600; }
+    .avail-desc { font-size: 11px; color: var(--text-muted); line-height: 1.4; margin-bottom: 10px; }
+    .avail-btns-sb { display: flex; flex-direction: column; gap: 6px; }
+    .avail-btn-sb { display: flex; align-items: center; justify-content: center; gap: 6px; font-size: 12px; font-weight: 600; padding: 7px 12px; border-radius: 6px; text-decoration: none; font-family: 'Inter', sans-serif; border: none; cursor: pointer; transition: all 0.15s; }
+    .avail-btn-sb.primary { background: var(--orange); color: #fff; }
+    .avail-btn-sb.primary:hover { opacity: 0.88; }
+    .avail-btn-sb.secondary { background: var(--light-grey); color: var(--black); border: 1px solid var(--border-mid); }
+    .avail-btn-sb.secondary:hover { border-color: var(--orange); color: var(--orange); }
+
+    .main { padding: 44px 52px 80px; max-width: 100%; margin: 0; }
+    .topnav { display: none; }
+    #theme-toggle { right: 24px; }
+  }
+
+  @media (max-width: 480px) {
+    .hero-title { font-size: 28px; }
+    .main { padding: 20px 16px 80px; }
+    .available-bar { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<button id="theme-toggle" title="Toggle theme">&#9790;</button>
+
+<div class="outer">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-name">Akshay <span>Sethi</span></div>
+    <div class="sidebar-role">PMM &middot; AI Builder &middot; Growth Marketer</div>
+
+    <div class="sidebar-label">On this page</div>
+    <nav class="sidebar-nav">
+      <a href="#projects">What I'm Building</a>
+      <a href="#cases">Case Studies</a>
+      <a href="#skills">Skills</a>
+    </nav>
+
+    <div class="sidebar-divider"></div>
+    <div class="sidebar-label">Other pages</div>
+    <div class="sidebar-pages">
+      <a href="/">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
+        Home
+      </a>
+      <a href="/profile">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        Profile
+      </a>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-avail">
+      <div class="avail-row">
+        <div class="avail-dot"></div>
+        <span class="avail-text">Available</span>
+      </div>
+      <p class="avail-desc">Open to PMM, AI Marketing &amp; AI Generalist roles</p>
+      <div class="avail-btns-sb">
+        <a href="https://wa.me/919990374477?text=Hello%20saw%20your%20portfolio%20and%20would%20like%20to%20connect" target="_blank" class="avail-btn-sb primary">WhatsApp</a>
+        <a href="https://www.linkedin.com/in/akshay-sethi/" target="_blank" class="avail-btn-sb secondary">LinkedIn</a>
+        <a href="Akshay_Sethi_2026.pdf" download class="avail-btn-sb secondary">Download CV</a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+
+    <div class="topnav">
+      <a href="/" class="back-link">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+        sethi.si
+      </a>
+    </div>
+
+    <div class="hero">
+      <div class="hero-label">Portfolio</div>
+      <h1 class="hero-title">I don't just market products.<br><span>I build them too.</span></h1>
+      <p class="hero-sub">Growth marketer with 10+ years of experience. Now building AI tools, shipping at hackathons, and doing the work outside the job description.</p>
+    </div>
+
+    <!-- PROJECTS -->
+    <div class="section" id="projects">
+      <div class="section-title">What I'm Building</div>
+      <div class="projects-grid">
+
+        <div class="project-card">
+          <div class="project-top">
+            <div class="project-name">HumanType</div>
+            <span class="project-stage stage-prototype">Prototype</span>
+          </div>
+          <div class="project-type">AI Tool &middot; Personal Project</div>
+          <div class="project-desc">Paste any AI-generated text — HumanType rewrites it to sound natural, personal, and human. Copy and share anywhere. Built for marketers, founders, and creators who use AI but don't want to sound like they do.</div>
+          <div class="project-tags">
+            <span class="ptag">AI Writing</span><span class="ptag">Productivity</span><span class="ptag">Marketers</span><span class="ptag">Founders</span>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-top">
+            <div class="project-name">2Brain/OS</div>
+            <span class="project-stage stage-building">Beta</span>
+          </div>
+          <div class="project-type">AI System &middot; Personal Project</div>
+          <div class="project-desc">A second brain operating system built on Notion and AI. Designed to capture, organise, and surface knowledge when you need it — not when you remember to look. Built for people who think in systems.</div>
+          <div class="project-tags">
+            <span class="ptag">Notion</span><span class="ptag">AI</span><span class="ptag">PKM</span><span class="ptag">Productivity</span>
+          </div>
+          <a href="https://AiBrain.promptsethi.com" target="_blank" class="project-link">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            View project
+          </a>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- CASE STUDIES -->
+    <div class="section" id="cases">
+      <div class="section-title">Case Studies</div>
+      <div class="case-list">
+
+        <div class="case-item" id="cs1">
+          <div class="case-header" onclick="toggleCase('cs1')">
+            <div class="case-left">
+              <div class="case-title">Ayuda Vibecoding Hackathon &mdash; Chrome Extension</div>
+              <div class="case-meta">AI-powered Chrome Extension &middot; April 2026</div>
+            </div>
+            <div class="case-right">
+              <span class="case-badge badge-done">Done</span>
+              <span class="case-chevron">&#9660;</span>
+            </div>
+          </div>
+          <div class="case-body">
+            <div class="case-coming">Full case study coming soon &mdash; building write-up post hackathon.</div>
+          </div>
+        </div>
+
+        <div class="case-item" id="cs2">
+          <div class="case-header" onclick="toggleCase('cs2')">
+            <div class="case-left">
+              <div class="case-title">Hackathon 2</div>
+              <div class="case-meta">Coming soon &middot; 2026</div>
+            </div>
+            <div class="case-right">
+              <span class="case-badge badge-soon">Coming Soon</span>
+              <span class="case-chevron">&#9660;</span>
+            </div>
+          </div>
+          <div class="case-body">
+            <div class="case-coming">Case study will be added after the next hackathon.</div>
+          </div>
+        </div>
+
+        <div class="case-item" id="cs3">
+          <div class="case-header" onclick="toggleCase('cs3')">
+            <div class="case-left">
+              <div class="case-title">Product Teardown 1</div>
+              <div class="case-meta">Ayuda PM Course &middot; Coming next week</div>
+            </div>
+            <div class="case-right">
+              <span class="case-badge badge-soon">Coming Soon</span>
+              <span class="case-chevron">&#9660;</span>
+            </div>
+          </div>
+          <div class="case-body">
+            <div class="case-coming">First product teardown from the Ayuda PM course &mdash; dropping next week.</div>
+          </div>
+        </div>
+
+        <div class="case-item" id="cs4">
+          <div class="case-header" onclick="toggleCase('cs4')">
+            <div class="case-left">
+              <div class="case-title">Product Teardown 2</div>
+              <div class="case-meta">Ayuda PM Course &middot; Coming next week</div>
+            </div>
+            <div class="case-right">
+              <span class="case-badge badge-soon">Coming Soon</span>
+              <span class="case-chevron">&#9660;</span>
+            </div>
+          </div>
+          <div class="case-body">
+            <div class="case-coming">Second product teardown from the Ayuda PM course &mdash; dropping next week.</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- SKILLS -->
+    <div class="section" id="skills">
+      <div class="section-title">Skills</div>
+      <div class="skills-grid">
+        <div class="skill-row">
+          <div class="skill-label">Product Marketing</div>
+          <div class="skill-tags"><span class="stag">Go-to-Market</span><span class="stag">Positioning &amp; Messaging</span><span class="stag">Product Launches</span><span class="stag">Competitive Analysis</span><span class="stag">User Research</span><span class="stag">Narrative Building</span></div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-label">Growth &amp; Partnerships</div>
+          <div class="skill-tags"><span class="stag">Strategic Partnerships</span><span class="stag">0-to-1 Monetisation</span><span class="stag">Affiliate Marketing</span><span class="stag">Channel Strategy</span><span class="stag">P&amp;L Ownership</span><span class="stag">Retention</span></div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-label">AI &amp; Builder Tools</div>
+          <div class="skill-tags"><span class="stag">Claude</span><span class="stag">Cursor</span><span class="stag">Notion AI</span><span class="stag">Perplexity</span><span class="stag">Gamma</span><span class="stag">Prompt Engineering</span><span class="stag">Vibe Coding</span></div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-label">Analytics &amp; Tools</div>
+          <div class="skill-tags"><span class="stag">Mixpanel</span><span class="stag">AppsFlyer</span><span class="stag">Excel</span><span class="stag">Miro</span><span class="stag">PowerPoint</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AVAILABLE -->
+    <div class="available-bar">
+      <div class="available-left">
+        <div class="available-dot">
+          <div class="dot-pulse"></div>
+          <span class="available-status">Available for new opportunities</span>
+        </div>
+        <div class="available-title">Open to PMM &amp; AI Roles</div>
+        <div class="available-sub">Product Marketing &middot; AI Marketing &middot; AI Generalist</div>
+      </div>
+      <div class="available-btns">
+        <a href="https://wa.me/919990374477?text=Hello%20saw%20your%20portfolio%20and%20would%20like%20to%20connect" target="_blank" class="avail-btn primary">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.558 4.122 1.528 5.855L.057 23.986l6.284-1.641A11.94 11.94 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.894a9.877 9.877 0 0 1-5.031-1.378l-.36-.214-3.732.975.999-3.648-.235-.374A9.861 9.861 0 0 1 2.106 12C2.106 6.58 6.58 2.106 12 2.106S21.894 6.58 21.894 12 17.42 21.894 12 21.894z"/></svg>
+          WhatsApp
+        </a>
+        <a href="https://www.linkedin.com/in/akshay-sethi/" target="_blank" class="avail-btn ghost">LinkedIn</a>
+        <a href="Akshay_Sethi_2026.pdf" download class="avail-btn ghost">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 15l-4-4h3V4h2v7h3l-4 4zm-7 4v-2h14v2H5z"/></svg>
+          Download CV
+        </a>
+      </div>
+    </div>
+
+    <div class="portfolio-footer">
+      <a href="/">sethi.si</a>
+      <span>Updated April 2026</span>
+    </div>
+
+  </main>
+</div>
+
+<script>
+(function() {
+  var btn = document.getElementById('theme-toggle');
+  if (localStorage.getItem('theme') === 'dark') {
+    document.body.classList.add('dark');
+    btn.textContent = '\u2600';
+  }
+  btn.addEventListener('click', function() {
+    document.body.classList.toggle('dark');
+    var dark = document.body.classList.contains('dark');
+    btn.textContent = dark ? '\u2600' : '\u263D';
+    localStorage.setItem('theme', dark ? 'dark' : 'light');
+  });
+
+  window.toggleCase = function(id) {
+    document.getElementById(id).classList.toggle('open');
+  };
+
+  var sections = document.querySelectorAll('.section');
+  sections.forEach(function(el) { el.classList.add('hidden'); });
+  var io = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) { entry.target.classList.remove('hidden'); io.unobserve(entry.target); }
+    });
+  }, { threshold: 0.05 });
+  sections.forEach(function(el, i) {
+    el.style.transitionDelay = (i * 80) + 'ms';
+    io.observe(el);
+  });
+})();
+</script>
+
+</body>
+</html>

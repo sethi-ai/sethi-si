@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en" id="root">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Photos — Akshay Sethi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    :root{--bg:#EDEDEA;--card:#F5F5F2;--text:#111;--muted:#888;--faint:#BBBBBB;--divider:#DDDDD8;--orange:#F47A1F;--serif:'Playfair Display',Georgia,serif;--sans:'Inter',system-ui,sans-serif;}
+    html.dark{--bg:#111;--card:#1A1A1A;--text:#F0F0EB;--muted:#888;--faint:#555;--divider:#2A2A2A;}
+    html,body{background:var(--bg);color:var(--text);font-family:var(--sans);-webkit-font-smoothing:antialiased;min-height:100vh;transition:background .2s,color .2s;}
+    a{color:inherit;text-decoration:none;}
+    .wrap{max-width:900px;margin:0 auto;padding:0 32px 80px;}
+
+    /* Nav */
+    nav{padding:28px 0 0;}
+    .nav-row1{display:flex;align-items:center;justify-content:space-between;padding-bottom:10px;}
+    .nav-name{font-family:var(--serif);font-size:20px;font-weight:500;} .nav-name span{color:var(--orange);}
+    .nav-work{font-size:13px;color:var(--muted);transition:color .12s;} .nav-work:hover{color:var(--orange);}
+    .nav-row2{padding:8px 0 16px;border-bottom:1px solid var(--divider);font-size:12px;color:var(--faint);display:flex;align-items:center;gap:8px;}
+    .nav-sep{color:var(--divider);}
+
+    /* Page head */
+    .page-head{padding:44px 0 32px;}
+    .page-head h1{font-family:var(--serif);font-size:32px;font-weight:400;letter-spacing:-0.4px;margin-bottom:10px;}
+    .page-head p{font-size:14px;color:var(--muted);line-height:1.6;max-width:480px;}
+    .page-head .tag{display:inline-flex;align-items:center;gap:5px;font-size:11px;color:var(--faint);margin-top:12px;letter-spacing:0.06em;text-transform:uppercase;}
+    .tag-dot{width:6px;height:6px;border-radius:50%;background:var(--orange);}
+
+    /* Grid */
+    .photo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;}
+    .photo-cell{aspect-ratio:1;overflow:hidden;cursor:pointer;position:relative;background:#ccc;}
+    .photo-cell img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .35s ease;}
+    .photo-cell:hover img{transform:scale(1.04);}
+    .photo-cell::after{content:'';position:absolute;inset:0;background:rgba(244,122,31,0);transition:background .2s;}
+    .photo-cell:hover::after{background:rgba(244,122,31,0.06);}
+
+    /* Lightbox */
+    .lightbox{position:fixed;inset:0;background:rgba(0,0,0,0.95);z-index:100;display:none;align-items:center;justify-content:center;padding:24px;}
+    .lightbox.open{display:flex;}
+    .lb-close{position:absolute;top:20px;right:24px;color:#fff;font-size:22px;cursor:pointer;opacity:0.6;background:none;border:none;transition:opacity .15s;}
+    .lb-close:hover{opacity:1;}
+    .lb-prev,.lb-next{position:absolute;top:50%;transform:translateY(-50%);color:#fff;font-size:24px;cursor:pointer;opacity:0.5;background:none;border:none;padding:12px;transition:opacity .15s;}
+    .lb-prev{left:12px;} .lb-next{right:12px;}
+    .lb-prev:hover,.lb-next:hover{opacity:1;}
+    .lb-img{max-width:90vw;max-height:85vh;object-fit:contain;border-radius:2px;display:block;}
+    .lb-caption{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);font-size:12px;color:rgba(255,255,255,0.45);letter-spacing:0.06em;text-transform:uppercase;white-space:nowrap;}
+
+    /* Footer */
+    .foot{max-width:900px;margin:0 auto;padding:32px 32px 48px;border-top:1px solid var(--divider);display:flex;gap:24px;}
+    .foot a{font-size:12px;color:var(--faint);transition:color .12s;} .foot a:hover{color:var(--orange);}
+
+    /* Float dark mode */
+    .theme-btn{position:fixed;bottom:28px;right:28px;width:40px;height:40px;border-radius:50%;background:var(--card);border:1px solid var(--divider);cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--faint);box-shadow:0 2px 12px rgba(0,0,0,0.08);transition:border-color .15s,color .15s;}
+    .theme-btn:hover{border-color:var(--orange);color:var(--orange);}
+    .theme-btn svg{width:15px;height:15px;fill:currentColor;}
+
+    @media(max-width:680px){
+      .wrap{padding:0 20px 60px;}
+      .photo-grid{grid-template-columns:repeat(3,1fr);gap:3px;}
+    }
+  </style>
+</head>
+<body>
+<div class="wrap">
+
+  <nav>
+    <div class="nav-row1">
+      <a class="nav-name" href="/">Akshay <span>Sethi</span></a>
+      <a class="nav-work" href="/connect">the work side →</a>
+    </div>
+    <div class="nav-row2">
+      <span id="clock">—</span>
+      <span class="nav-sep">·</span>
+      <span>Gurgaon, IN</span>
+      <span class="nav-sep">·</span>
+      <span id="weather">—</span>
+    </div>
+  </nav>
+
+  <div class="page-head">
+    <h1>Photos</h1>
+    <p>Photos that never made it to Instagram. Some frames live outside the algorithm.</p>
+    <div class="tag"><div class="tag-dot"></div> Sunsets · 9 frames</div>
+  </div>
+
+  <div class="photo-grid" id="grid">
+    <div class="photo-cell" data-idx="0"><img src="photos/sunset-flag.jpg" alt="Sunset with flag" loading="lazy" /></div>
+    <div class="photo-cell" data-idx="1"><img src="photos/sunset-plane.jpg" alt="Sunset from plane" loading="lazy" /></div>
+    <div class="photo-cell" data-idx="2"><img src="photos/sunset-city.jpg" alt="City sunset" loading="lazy" /></div>
+    <div class="photo-cell" data-idx="3"><img src="photos/sunset-3.jpg" alt="Sunset" loading="lazy" /></div>
+    <div class="photo-cell" data-idx="4"><img src="photos/sunset-4.jpg" alt="Sunset" loading="lazy" /></div>
+    <div class="photo-cell" data-idx="5"><img src="photos/sunset-5.jpg" alt="Sunset" loading="lazy" /></div>
+    <div class="photo-cell" data-idx="6"><img src="photos/sunset-6.jpg" alt="Sunset" loading="lazy" /></div>
+    <div class="photo-cell" data-idx="7"><img src="photos/sunset-7.jpg" alt="Sunset" loading="lazy" /></div>
+    <div class="photo-cell" data-idx="8"><img src="photos/sunset-8.jpg" alt="Sunset" loading="lazy" /></div>
+  </div>
+
+</div>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox">
+  <button class="lb-close" id="lb-close">✕</button>
+  <button class="lb-prev" id="lb-prev">‹</button>
+  <img class="lb-img" id="lb-img" src="" alt="" />
+  <button class="lb-next" id="lb-next">›</button>
+  <div class="lb-caption" id="lb-caption"></div>
+</div>
+
+<!-- Footer -->
+<footer class="foot">
+  <a href="/writing">writing</a>
+  <a href="/photos">photos</a>
+</footer>
+
+<!-- Dark mode toggle -->
+<button class="theme-btn" id="theme-btn" title="Toggle dark mode">
+  <svg id="theme-icon" viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 0 1-4.4 2.26 5.403 5.403 0 0 1-3.14-9.8c-.44-.06-.9-.1-1.36-.1z"/></svg>
+</button>
+
+<script>
+  // Clock & weather
+  function tick(){const n=new Date(new Date().toLocaleString('en-US',{timeZone:'Asia/Kolkata'}));const h=n.getHours();const m=String(n.getMinutes()).padStart(2,'0');const ap=h>=12?'PM':'AM';document.getElementById('clock').textContent=`${h%12||12}:${m} ${ap}`;}
+  tick();setInterval(tick,60000);
+  fetch('https://api.open-meteo.com/v1/forecast?latitude=28.4595&longitude=77.0266&current_weather=true').then(r=>r.json()).then(d=>{document.getElementById('weather').textContent=`☁ ${Math.round(d.current_weather.temperature)}°C`;}).catch(()=>{});
+
+  // Lightbox
+  const photos=[
+    {src:'photos/sunset-flag.jpg',cap:'Sunset · Gurgaon'},
+    {src:'photos/sunset-plane.jpg',cap:'Sunset · 35,000 ft'},
+    {src:'photos/sunset-city.jpg',cap:'Sunset · City'},
+    {src:'photos/sunset-3.jpg',cap:'Sunset'},
+    {src:'photos/sunset-4.jpg',cap:'Sunset'},
+    {src:'photos/sunset-5.jpg',cap:'Sunset'},
+    {src:'photos/sunset-6.jpg',cap:'Sunset'},
+    {src:'photos/sunset-7.jpg',cap:'Sunset'},
+    {src:'photos/sunset-8.jpg',cap:'Sunset'},
+  ];
+  let cur=0;
+  const lb=document.getElementById('lightbox');
+  const lbImg=document.getElementById('lb-img');
+  const lbCap=document.getElementById('lb-caption');
+
+  function openLb(i){cur=i;lbImg.src=photos[i].src;lbCap.textContent=photos[i].cap;lb.classList.add('open');}
+  function closeLb(){lb.classList.remove('open');}
+  function prev(){cur=(cur-1+photos.length)%photos.length;lbImg.src=photos[cur].src;lbCap.textContent=photos[cur].cap;}
+  function next(){cur=(cur+1)%photos.length;lbImg.src=photos[cur].src;lbCap.textContent=photos[cur].cap;}
+
+  document.querySelectorAll('.photo-cell').forEach(c=>c.addEventListener('click',()=>openLb(+c.dataset.idx)));
+  document.getElementById('lb-close').addEventListener('click',closeLb);
+  document.getElementById('lb-prev').addEventListener('click',prev);
+  document.getElementById('lb-next').addEventListener('click',next);
+  lb.addEventListener('click',e=>{if(e.target===lb)closeLb();});
+  document.addEventListener('keydown',e=>{if(!lb.classList.contains('open'))return;if(e.key==='Escape')closeLb();if(e.key==='ArrowLeft')prev();if(e.key==='ArrowRight')next();});
+
+  // Dark mode
+  const btn=document.getElementById('theme-btn');
+  const icon=document.getElementById('theme-icon');
+  const SUN='<path d="M12 17a5 5 0 1 0 0-10 5 5 0 0 0 0 10zm0-15v2m0 16v2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>';
+  const MOON='<path d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 0 1-4.4 2.26 5.403 5.403 0 0 1-3.14-9.8c-.44-.06-.9-.1-1.36-.1z"/>';
+  let dark=false;
+  btn.addEventListener('click',()=>{dark=!dark;document.getElementById('root').classList.toggle('dark',dark);icon.innerHTML=dark?SUN:MOON;icon.setAttribute('fill',dark?'none':'currentColor');icon.setAttribute('stroke',dark?'currentColor':'none');icon.setAttribute('stroke-width',dark?'2':'0');});
+</script>
+</body>
+</html>
