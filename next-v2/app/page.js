@@ -1,7 +1,17 @@
 import { about, quotes, products, photos, contact, socials, companies, writing } from "./data";
+import content from "./content.json";
 import { Clock, Weather, ThemeToggle, NowPlaying } from "./Live";
 
+const fmt = (d) => (d ? d.slice(8, 10) + "." + d.slice(5, 7) + "." + d.slice(2, 4) : "");
+
 export default function Home() {
+  const posts = content.writing.length
+    ? content.writing.map((w) => ({ date: w.date.split("-").reverse().join(".").replace(/^(\d\d)\.(\d\d)\.\d\d(\d\d)$/, "$1.$2.$3"), title: w.title, href: `/v2/writing/${w.slug}` }))
+    : writing;
+  const homePhotos = content.photos.length
+    ? content.photos.filter((x) => x.home).concat(content.photos.filter((x) => !x.home)).slice(0, 9).map((x) => [x.src, x.caption])
+    : photos.map(([f, c]) => [`/v2/photos/${f}.webp`, c]);
+  const qs = content.quotes.length ? content.quotes : quotes;
   return (
     <>
       <header className="nav">
@@ -65,7 +75,7 @@ export default function Home() {
         <section className="section" id="writing">
           <h2>Writing</h2>
           <ul className="wlist">
-            {writing.map((w) => (
+            {posts.map((w) => (
               <li key={w.title}><span>{w.date}</span><a href={w.href}>{w.title}</a></li>
             ))}
           </ul>
@@ -73,15 +83,15 @@ export default function Home() {
 
         <section className="section">
           <h2>Quotes I live by</h2>
-          <div className="quotes">{quotes.map((q) => <p key={q}>"{q}"</p>)}</div>
+          <div className="quotes">{qs.map((q) => <p key={q}>"{q}"</p>)}</div>
         </section>
 
         <section className="section" id="photos">
           <div className="sec-head"><h2>Photos I took and love</h2><a className="all" href="/photos">see all →</a></div>
           <div className="photos">
-            {photos.map(([f, c]) => (
+            {homePhotos.map(([f, c]) => (
               <a key={f} href="/photos" className="photo">
-                <img src={`/v2/photos/${f}.webp`} alt={c} loading="lazy" />
+                <img src={f} alt={c} loading="lazy" />
                 <span>{c}</span>
               </a>
             ))}

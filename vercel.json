@@ -2,14 +2,44 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "rewrites": [
-    { "source": "/writing", "destination": "/writing.html" },
-    { "source": "/photos", "destination": "/photos.html" },
-    { "source": "/me", "destination": "/me.html" },
-    { "source": "/connect", "destination": "/connect.html" },
-    { "source": "/links", "destination": "/links.html" },
-    { "source": "/prompts", "destination": "https://promptsethi.com" },
-    { "source": "/prompts/:path*", "destination": "https://promptsethi.com/:path*" },
-    { "source": "/profile", "destination": "/profile.html" },
-    { "source": "/portfolio", "destination": "/portfolio.html" }
-  ]
+    {
+      "source": "/writing",
+      "destination": "/writing.html"
+    },
+    {
+      "source": "/photos",
+      "destination": "/photos.html"
+    },
+    {
+      "source": "/me",
+      "destination": "/me.html"
+    },
+    {
+      "source": "/connect",
+      "destination": "/connect.html"
+    },
+    {
+      "source": "/links",
+      "destination": "/links.html"
+    },
+    {
+      "source": "/prompts",
+      "destination": "https://promptsethi.com"
+    },
+    {
+      "source": "/prompts/:path*",
+      "destination": "https://promptsethi.com/:path*"
+    },
+    {
+      "source": "/profile",
+      "destination": "/profile.html"
+    },
+    {
+      "source": "/portfolio",
+      "destination": "/portfolio.html"
+    }
+  ],
+  "installCommand": "echo skip-install",
+  "buildCommand": "if [ -d next-v2 ]; then cd next-v2 && npm ci && npm run build && rm -rf ../v2 && cp -r out ../v2; fi",
+  "outputDirectory": "."
 }
