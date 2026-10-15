@@ -10,6 +10,7 @@ export default function Home() {
           <div className="nav-meta"><Clock /><i>·</i><span>Gurgaon, IN</span><i>·</i><Weather /></div>
         </div>
         <nav className="nav-row2">
+          <a href="/writing">writing</a>
           <a href="#building">building</a>
           <a href="#photos">photos</a>
           <a href="#contact">say hi</a>
@@ -94,7 +95,7 @@ export default function Home() {
       </main>
 
       <footer className="foot">
-        <div><a href="/photos">photos</a><a href={contact.linkedin}>linkedin</a><a href="https://dyut.si">dyut.si</a></div>
+        <div><a href="/writing">writing</a><a href="/photos">photos</a><a href={contact.linkedin}>linkedin</a><a href="https://dyut.si">dyut.si</a></div>
         <span>sethi.si</span>
       </footer>
       <ThemeToggle />
