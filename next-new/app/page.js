@@ -1,4 +1,4 @@
-import { about, quotes, products, photos, contact } from "./data";
+import { about, quotes, products, photos, contact, socials } from "./data";
 import { Clock, Weather, ThemeToggle } from "./Live";
 
 export default function Home() {
@@ -79,13 +79,16 @@ export default function Home() {
           <div className="ctas">
             <a className="btn primary" href={contact.whatsapp} target="_blank" rel="noreferrer">WhatsApp</a>
             <a className="btn" href={`mailto:${contact.email}`}>{contact.email}</a>
-            <a className="btn" href={contact.linkedin} target="_blank" rel="noreferrer">LinkedIn</a>
           </div>
+          <p className="lbl find">Find me</p>
           <div className="socials">
-            <a href="https://instagram.com/sethi.gram" target="_blank" rel="noreferrer">@sethi.gram <span>life</span></a>
-            <a href="https://instagram.com/sethi.ai" target="_blank" rel="noreferrer">@sethi.ai <span>AI</span></a>
-            <a href="https://threads.net/@sethi.gram" target="_blank" rel="noreferrer">Threads <span>@sethi.gram</span></a>
-            <a href="https://open.spotify.com/playlist/11BYNAVd6M1Qg0UYpLKbSR" target="_blank" rel="noreferrer">My playlist <span>Spotify</span></a>
+            {socials.map((x) => (
+              <a key={x.name} href={x.href} target="_blank" rel="noreferrer">
+                <svg viewBox="0 0 24 24"><path d={x.icon} /></svg>
+                <b>{x.name}</b>
+                <span>{x.sub}</span>
+              </a>
+            ))}
           </div>
         </section>
       </main>
