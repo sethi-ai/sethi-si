@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en" id="root">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Akshay Sethi</title>
+  <meta name="description" content="Akshay Sethi — builder, writer, amateur photographer." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    :root{--bg:#F5F0E8;--card:#EDE8DF;--text:#111111;--muted:#555555;--faint:#777777;--divider:#DDD8CE;--orange:#F47A1F;--orange-bg:rgba(244,122,31,0.07);--serif:'Playfair Display',Georgia,serif;--sans:'Inter',system-ui,sans-serif;}
+    html.dark{--bg:#111111;--card:#1A1A1A;--text:#F0F0EB;--muted:#888888;--faint:#666666;--divider:#2A2A2A;--orange-bg:rgba(244,122,31,0.1);}
+    html,body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased;min-height:100vh;transition:background .2s,color .2s;}
+    a{color:inherit;text-decoration:none;}
+    .wrap{max-width:900px;margin:0 auto;padding:0 32px;}
+
+    /* NAV */
+    .nav-outer{max-width:900px;margin:0 auto;padding:0 32px;}
+    .nav-row1{display:flex;align-items:center;justify-content:space-between;padding:28px 0 10px;}
+    .nav-name{font-family:var(--serif);font-size:20px;font-weight:500;color:var(--text);letter-spacing:-0.3px;}
+    .nav-name span{color:var(--orange);}
+    .nav-meta{font-size:12px;color:var(--faint);display:flex;align-items:center;gap:8px;}
+    .nav-dot{color:var(--divider);}
+    .nav-row2{padding:10px 0 18px;border-bottom:1px solid var(--divider);display:flex;align-items:center;justify-content:space-between;}
+    .nav-pages{display:flex;gap:28px;list-style:none;}
+    .nav-pages a{font-size:15px;color:var(--muted);transition:color .12s;}
+    .nav-pages a:hover{color:var(--orange);}
+    .nav-work{font-family:var(--serif);font-size:15px;font-style:italic;color:var(--text);}
+    .nav-work:hover{opacity:0.75;}
+    .nav-work-o{color:var(--orange);}
+
+    /* HERO — 2 col desktop, display:contents trick for mobile reorder */
+    .hero{display:grid;grid-template-columns:1fr 300px;gap:52px;padding:44px 0 52px;border-bottom:1px solid var(--divider);align-items:start;}
+    .hero-left{display:flex;flex-direction:column;}
+    .hero-right{display:flex;flex-direction:column;gap:28px;}
+
+    .hero-heading{font-family:var(--serif);font-size:26px;font-weight:400;line-height:1.45;letter-spacing:-0.3px;color:var(--muted);margin-bottom:24px;}
+    .hero-heading .nb{color:var(--text);font-weight:500;}
+    .hero-heading .no{color:var(--orange);font-weight:500;}
+
+    .hero-photo img{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:4px;display:block;}
+
+    /* Summary */
+    .slbl{font-size:10px;font-weight:500;letter-spacing:0.13em;text-transform:uppercase;color:var(--faint);margin-bottom:10px;}
+    .sum{list-style:none;display:flex;flex-direction:column;gap:5px;margin-bottom:28px;}
+    .sum li{font-size:13px;color:var(--muted);display:flex;align-items:baseline;gap:8px;}
+    .sum li::before{content:'·';color:var(--orange);flex-shrink:0;}
+    .sum a{color:var(--text);border-bottom:1px solid var(--divider);transition:color .12s,border-color .12s;}
+    .sum a:hover{color:var(--orange);border-color:var(--orange);}
+
+    /* Convo starters */
+    .convos{margin-bottom:24px;}
+    .convo-item{display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid var(--divider);font-size:12px;}
+    .convo-item:first-child{border-top:1px solid var(--divider);}
+    .convo-dot{width:7px;height:7px;border-radius:50%;background:var(--orange);animation:pulse 2s infinite;flex-shrink:0;}
+    @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.3;}}
+    .convo-emoji{font-size:13px;flex-shrink:0;width:16px;text-align:center;}
+    .convo-label{color:var(--faint);flex-shrink:0;}
+    .convo-spotify{color:var(--text);transition:color .12s;}
+    .convo-spotify:hover{color:var(--orange);}
+
+    /* Socials — horizontal 3-col card grid */
+    .social-rows{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px;}
+    .social-row{display:flex;flex-direction:column;gap:4px;padding:10px;border:1px solid var(--divider);border-radius:8px;background:var(--card);transition:background .15s,border-color .15s;position:relative;overflow:hidden;}
+    .social-row::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2.5px;background:var(--orange);transform:scaleY(0);transform-origin:center;transition:transform .2s cubic-bezier(.4,0,.2,1);}
+    .social-row:hover::before{transform:scaleY(1);}
+    .social-row:hover{background:var(--orange-bg);border-color:rgba(244,122,31,.25);}
+    .sib{width:24px;height:24px;border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-bottom:6px;}
+    .sib svg{width:12px;height:12px;fill:#fff;}
+    .sn{font-size:12px;color:var(--text);font-weight:500;transition:color .12s;}
+    .sh{font-size:10px;color:var(--faint);line-height:1.3;}
+    .social-row:hover .sn{color:var(--orange);}
+
+    .email-pref{font-size:12px;color:var(--faint);}
+    .email-pref a{color:var(--muted);border-bottom:1px solid var(--divider);transition:color .12s;}
+    .email-pref a:hover{color:var(--orange);}
+
+    /* Quotes */
+    .quotes-list{display:flex;flex-direction:column;gap:18px;}
+    .quote-item{display:flex;gap:12px;}
+    .qbar{width:2px;background:var(--orange);border-radius:2px;flex-shrink:0;opacity:0.5;transition:opacity .2s;}
+    .quote-item:hover .qbar{opacity:1;}
+    .qtext{font-family:var(--serif);font-size:13px;font-style:italic;line-height:1.55;color:var(--text);}
+
+    /* SECTIONS */
+    .section{padding:52px 0 0;}
+    .sec-label{font-size:10px;font-weight:500;letter-spacing:0.13em;text-transform:uppercase;color:var(--faint);margin-bottom:24px;}
+    .sec-header{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:24px;}
+    .sec-all{font-size:12px;color:var(--faint);transition:color .12s;}
+    .sec-all:hover{color:var(--orange);}
+
+    /* Building — 3-col desktop, 2-col mobile */
+    .building-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;}
+    .build-card{padding:18px;border:1px solid var(--divider);border-radius:8px;background:var(--card);transition:border-color .15s,background .15s;position:relative;overflow:hidden;}
+    .build-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--orange);transform:scaleY(0);transform-origin:center;transition:transform .2s cubic-bezier(.4,0,.2,1);}
+    .build-card:hover::before{transform:scaleY(1);}
+    .build-card:hover{background:var(--orange-bg);border-color:rgba(244,122,31,.2);}
+    .build-card-featured{grid-column:1/-1;display:flex;align-items:center;gap:20px;padding:22px 24px;}
+    .build-card-featured .build-icon{margin-bottom:0;width:36px;height:36px;flex-shrink:0;}
+    .build-card-featured .build-name{font-size:16px;}
+    .build-icon{width:28px;height:28px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#fff;margin-bottom:10px;}
+    .build-name{font-size:14px;color:var(--text);font-weight:400;margin-bottom:4px;transition:color .12s;}
+    .build-card:hover .build-name{color:var(--orange);}
+    .build-desc{font-size:12px;color:var(--faint);line-height:1.45;}
+    .build-badge{font-size:10px;color:var(--orange);background:var(--orange-bg);padding:2px 7px;border-radius:10px;margin-left:6px;}
+
+    /* Writing */
+    .writing-list{list-style:none;}
+    .writing-item{display:flex;align-items:baseline;justify-content:space-between;gap:16px;padding:12px 0;border-bottom:1px solid var(--divider);}
+    .writing-item:first-child{border-top:1px solid var(--divider);}
+    .writing-left{display:flex;align-items:baseline;gap:20px;flex:1;}
+    .wdate{font-size:11px;color:var(--faint);min-width:56px;flex-shrink:0;font-variant-numeric:tabular-nums;}
+    .wtitle{font-size:14px;color:var(--text);transition:color .12s;line-height:1.4;}
+    .writing-item:hover .wtitle{color:var(--orange);}
+    .wtag{font-size:11px;color:var(--faint);flex-shrink:0;transition:color .12s;}
+    .writing-item:hover .wtag{color:var(--orange);}
+
+    /* Photos */
+    .photo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;}
+    .photo-cell{aspect-ratio:1;overflow:hidden;cursor:pointer;position:relative;background:var(--divider);border-radius:2px;}
+    .photo-cell img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .35s ease;}
+    .photo-cell:hover img{transform:scale(1.04);}
+    .photo-tag{position:absolute;bottom:8px;left:8px;font-size:10px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:rgba(255,255,255,0.9);background:rgba(0,0,0,0.45);padding:3px 8px;border-radius:20px;z-index:2;backdrop-filter:blur(4px);}
+    .photo-caption{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.65) 0%,transparent 55%);display:flex;align-items:flex-end;padding:12px;opacity:0;transition:opacity .2s;z-index:1;}
+    .photo-cell:hover .photo-caption{opacity:1;}
+    .photo-caption span{font-size:11px;color:rgba(255,255,255,0.9);font-family:var(--serif);font-style:italic;}
+    .photo-cta{text-align:center;padding:20px 0 0;font-size:13px;color:var(--muted);}
+    .photo-cta a{color:var(--orange);border-bottom:1px solid rgba(244,122,31,.3);transition:border-color .12s;}
+    .photo-cta a:hover{border-color:var(--orange);}
+
+    /* Creative — 2x2 grid */
+    .poster-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;}
+    .poster-cell{aspect-ratio:1;border-radius:4px;overflow:hidden;display:flex;align-items:flex-end;padding:20px;transition:transform .2s ease;}
+    .poster-cell:hover{transform:scale(1.01);}
+    .poster-text{font-family:var(--serif);font-size:16px;line-height:1.35;}
+
+    /* Music */
+    .playlist-item{display:flex;align-items:center;gap:12px;padding:12px;border:1px solid var(--divider);border-radius:8px;background:var(--card);transition:border-color .15s,background .15s;position:relative;overflow:hidden;}
+    .playlist-item::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--orange);transform:scaleY(0);transform-origin:center;transition:transform .2s cubic-bezier(.4,0,.2,1);}
+    .playlist-item:hover::before{transform:scaleY(1);}
+    .playlist-item:hover{background:var(--orange-bg);border-color:rgba(244,122,31,.2);}
+    .pl-icon{width:36px;height:36px;border-radius:4px;background:#1DB954;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+    .pl-icon svg{width:18px;height:18px;fill:#fff;}
+    .pl-name{font-size:13px;color:var(--text);transition:color .15s;}
+    .playlist-item:hover .pl-name{color:var(--orange);}
+    .pl-meta{font-size:11px;color:var(--faint);}
+
+    /* Footer */
+    .page-footer{max-width:900px;margin:0 auto;padding:40px 32px 56px;border-top:1px solid var(--divider);display:flex;align-items:center;justify-content:space-between;}
+    .footer-links{display:flex;gap:24px;}
+    .footer-links a{font-size:12px;color:var(--faint);transition:color .12s;}
+    .footer-links a:hover{color:var(--orange);}
+    .footer-copy{font-size:11px;color:var(--faint);}
+
+    /* Floating dark mode */
+    .theme-btn{position:fixed;bottom:28px;right:28px;width:40px;height:40px;border-radius:50%;background:var(--card);border:1px solid var(--divider);cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--faint);box-shadow:0 2px 12px rgba(0,0,0,0.08);transition:border-color .15s,color .15s;z-index:50;}
+    .theme-btn:hover{border-color:var(--orange);color:var(--orange);}
+    .theme-btn svg{width:15px;height:15px;fill:currentColor;}
+
+    /* MOBILE */
+    @media (max-width:680px){
+      .wrap{padding:0 20px;}
+      .nav-outer{padding:0 20px;}
+      .nav-pages{display:none;}
+      .nav-row2{justify-content:flex-end;}
+
+      /* Hero: stack in correct order via display:contents + order */
+      .hero{display:flex;flex-direction:column;gap:28px;padding:32px 0 40px;}
+      .hero-left,.hero-right{display:contents;}
+      .hero-heading{order:1;margin-bottom:0;}
+      .hero-photo{order:2;}
+      .hero-body-wrap{order:3;}
+      .hero-quotes-wrap{order:4;}
+
+      .hero-heading{font-size:22px;}
+      .building-grid{grid-template-columns:repeat(2,1fr);}
+      .social-rows{grid-template-columns:repeat(3,1fr);}
+      .photo-tag{display:none;}
+      .page-footer{flex-direction:column;align-items:flex-start;gap:12px;padding:32px 20px 48px;}
+      /* Aditi fix — darker, bigger body text on mobile */
+      .sum li{font-size:14px;color:var(--text);}
+      .hero-heading{color:var(--text);}
+      .convo-label{color:var(--text);}
+      .convo-item{font-size:13px;}
+      .qtext{font-size:14px;}
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="nav-outer">
+      <div class="nav-row1">
+        <a class="nav-name" href="/">Akshay <span>Sethi</span></a>
+        <div class="nav-meta">
+          <span id="clock">—</span>
+          <span class="nav-dot">·</span>
+          <span>Gurgaon, IN</span>
+          <span class="nav-dot">·</span>
+          <span id="weather">—</span>
+        </div>
+      </div>
+      <div class="nav-row2">
+        <ul class="nav-pages">
+          <li><a href="/writing">writing</a></li>
+          <li><a href="/photos">photos</a></li>
+        </ul>
+        <a class="nav-work" href="https://dyut.si">what I'm building <span class="nav-work-o">→</span></a>
+      </div>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <section class="hero">
+
+      <!-- LEFT COL -->
+      <div class="hero-left">
+        <!-- 1: heading -->
+        <h1 class="hero-heading">
+          Hi, I'm <span class="nb">Akshay</span> <span class="no">Sethi</span>,
+          I build things that interest me, write when something won't leave my head,
+          and take photos of places before they change.
+        </h1>
+        <!-- 3: body -->
+        <div class="hero-body-wrap">
+          <p class="slbl">A few things about me</p>
+          <ul class="sum">
+            <li>Born in Jammu. Based in Gurgaon. Always planning the next escape.</li>
+            <li>Building for the itch, not the brief. Vibe coding makes it possible.</li>
+            <li>Content is winning. <a href="https://instagram.com/sethi.gram" target="_blank">@sethi.gram</a> is my counter-attack.</li>
+            <li>Shoots on iPhone. Calls it art. Learning videography — losing a war with video editing.</li>
+            <li>Still finding my ikigai. Loudly.</li>
+            <li>Meditates. Inconsistently.</li>
+            <li>Early adopter — tech, gadgets, internet, AI. All of it.</li>
+            <li>8-bit era. Never really left.</li>
+          </ul>
+          <div class="convos">
+            <div class="convo-item">
+              <div class="convo-dot"></div>
+              <span class="convo-label">Current obsession:</span>
+              <span style="color:var(--text);font-size:12px;">3D printing</span>
+            </div>
+            <div class="convo-item">
+              <span class="convo-emoji">✈</span>
+              <span class="convo-label">Next destination:</span>
+              <span style="color:var(--text);font-size:12px;">Kasar Devi</span>
+            </div>
+            <div class="convo-item">
+              <span class="convo-emoji">♪</span>
+              <span class="convo-label">Currently listening:</span>
+              <a href="https://open.spotify.com/track/0ny1jaCM7x9NO9RqJBclms" target="_blank" rel="noreferrer" class="convo-spotify" id="convo-song">—</a>
+            </div>
+          </div>
+          <!-- Socials: horizontal 3-col -->
+          <div class="social-rows">
+            <a href="https://instagram.com/sethi.gram" target="_blank" rel="noreferrer" class="social-row">
+              <div class="sib" style="background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);"><svg viewBox="0 0 24 24"><path d="M7 2C4.2 2 2 4.2 2 7v10c0 2.8 2.2 5 5 5h10c2.8 0 5-2.2 5-5V7c0-2.8-2.2-5-5-5H7zm5 5.3a4.7 4.7 0 1 1 0 9.4 4.7 4.7 0 0 1 0-9.4zm6.2-.8a1.1 1.1 0 1 1-2.2 0 1.1 1.1 0 0 1 2.2 0zM12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"/></svg></div>
+              <p class="sn">sethi.gram</p>
+              <p class="sh">@sethi.gram — life</p>
+            </a>
+            <a href="https://threads.net/@sethi.gram" target="_blank" rel="noreferrer" class="social-row">
+              <div class="sib" style="background:#000000;"><svg viewBox="0 0 24 24"><path d="M12.186 24h-.007c-3.581-.024-6.334-1.205-8.184-3.509C2.35 18.44 1.5 15.586 1.473 12.01v-.017c.027-3.579.877-6.43 2.522-8.476C5.845 1.205 8.6.024 12.18 0h.014c2.746.02 5.043.725 6.826 2.098 1.677 1.29 2.858 3.13 3.509 5.467l-2.04.569c-1.104-3.96-3.898-5.984-8.304-6.015-2.91.022-5.11.936-6.54 2.717C4.307 6.504 3.616 8.914 3.594 12c.022 3.089.713 5.5 2.053 7.166 1.43 1.783 3.631 2.698 6.54 2.717 1.868-.015 3.44-.466 4.765-1.342.93-.61 1.773-1.545 2.44-3.04L21.358 18c-.752 1.784-1.785 3.108-3.12 4.012C16.554 23.399 14.488 24 12.186 24zm7.5-11.4h-7.7a.754.754 0 0 1-.755-.754V6.8c0-.415.338-.754.755-.754h.037c3.97.17 6.177 2.4 6.437 6.368a.753.753 0 0 1-.774.786zm-6.946-1.5h6.16c-.367-2.718-1.87-4.2-4.59-4.464v3.71a.754.754 0 0 1-.75.754h-.82z"/></svg></div>
+              <p class="sn">Threads</p>
+              <p class="sh">@sethi.gram</p>
+            </a>
+            <a href="https://instagram.com/sethi.ai" target="_blank" rel="noreferrer" class="social-row">
+              <div class="sib" style="background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);"><svg viewBox="0 0 24 24"><path d="M7 2C4.2 2 2 4.2 2 7v10c0 2.8 2.2 5 5 5h10c2.8 0 5-2.2 5-5V7c0-2.8-2.2-5-5-5H7zm5 5.3a4.7 4.7 0 1 1 0 9.4 4.7 4.7 0 0 1 0-9.4zm6.2-.8a1.1 1.1 0 1 1-2.2 0 1.1 1.1 0 0 1 2.2 0zM12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"/></svg></div>
+              <p class="sn">sethi.ai</p>
+              <p class="sh">@sethi.ai — AI</p>
+            </a>
+            <a href="https://instagram.com/dyut.makes" target="_blank" rel="noreferrer" class="social-row">
+              <div class="sib" style="background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);"><svg viewBox="0 0 24 24"><path d="M7 2C4.2 2 2 4.2 2 7v10c0 2.8 2.2 5 5 5h10c2.8 0 5-2.2 5-5V7c0-2.8-2.2-5-5-5H7zm5 5.3a4.7 4.7 0 1 1 0 9.4 4.7 4.7 0 0 1 0-9.4zm6.2-.8a1.1 1.1 0 1 1-2.2 0 1.1 1.1 0 0 1 2.2 0zM12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"/></svg></div>
+              <p class="sn">dyut.makes</p>
+              <p class="sh">@dyut.makes — what I'm building</p>
+            </a>
+            <a href="https://linkedin.com/in/akshay-sethi" target="_blank" rel="noreferrer" class="social-row">
+              <div class="sib" style="background:#0A66C2;"><svg viewBox="0 0 24 24"><path d="M4.98 3.5A2.5 2.5 0 1 1 5 8a2.5 2.5 0 0 1-.02-5zM3 9h4v12H3zM9 9h3.6v1.7h.1a4 4 0 0 1 3.6-2c3.8 0 4.5 2.5 4.5 5.7V21h-4v-5.5c0-1.3 0-3-1.9-3s-2.2 1.4-2.2 2.9V21H9z"/></svg></div>
+              <p class="sn">LinkedIn</p>
+              <p class="sh">Akshay Sethi</p>
+            </a>
+          </div>
+          <p class="email-pref">Prefer writing an email — <a href="mailto:sethi.gram@gmail.com">sethi.gram@gmail.com</a></p>
+        </div>
+      </div>
+
+      <!-- RIGHT COL -->
+      <div class="hero-right">
+        <!-- 2: photo -->
+        <div class="hero-photo">
+          <img src="/akshay-hero.jpg" alt="Akshay Sethi" />
+        </div>
+        <!-- 4: quotes -->
+        <div class="hero-quotes-wrap">
+          <p class="slbl" style="margin-bottom:14px;">Quotes I live by</p>
+          <div class="quotes-list">
+            <div class="quote-item"><div class="qbar"></div><p class="qtext">"The bare minimum never changed anything."</p></div>
+            <div class="quote-item"><div class="qbar"></div><p class="qtext">"If oats can become milk, you can become anything."</p></div>
+            <div class="quote-item"><div class="qbar"></div><p class="qtext">"Stop planning, start breaking things."</p></div>
+            <div class="quote-item"><div class="qbar"></div><p class="qtext">"Your future is shaped by the habits you repeat, not the goals you set."</p></div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- NOW -->
+    <section class="section">
+      <p class="sec-label">Now</p>
+      <ul class="sum">
+        <li>[This month's focus: to add]</li>
+        <li>[One thing I'm learning: to add]</li>
+        <li>Last updated [date: to add]</li>
+      </ul>
+    </section>
+
+    <!-- THINGS I'M BUILDING -->
+    <section class="section">
+      <p class="sec-label">Things I'm building</p>
+      <div class="building-grid">
+        <a href="https://dyut.si" class="build-card build-card-featured">
+          <div class="build-icon" style="background:#F47A1F;font-size:11px;">DY</div>
+          <div>
+            <p class="build-name">Dyut</p>
+            <p class="build-desc">My AI product company. Building Knot Jot, Be Hanuman and Baalti.</p>
+          </div>
+        </a>
+        <a href="#" class="build-card">
+          <div class="build-icon" style="background:#111;">KJ</div>
+          <p class="build-name">Knot Jot <span class="build-badge">Soon</span></p>
+          <p class="build-desc">An AI companion for couples. Invite-only from 1 Nov.</p>
+        </a>
+        <a href="https://hanuman.dyut.si" class="build-card">
+          <div class="build-icon" style="background:#F47A1F;">BH</div>
+          <p class="build-name">Be Hanuman <span class="build-badge">Live</span></p>
+          <p class="build-desc">Learn the Hanuman Chalisa, one verse at a time.</p>
+        </a>
+      </div>
+    </section>
+
+    <!-- WRITING -->
+    <section class="section">
+      <div class="sec-header">
+        <p class="sec-label" style="margin-bottom:0;">Writing</p>
+        <a href="/writing" class="sec-all">all writing →</a>
+      </div>
+      <ul class="writing-list">
+        <li class="writing-item">
+          <div class="writing-left"><span class="wdate">24.08.26</span><a class="wtitle" href="/writing/the-art-of-slowing-down">The Art of Slowing Down</a></div>
+          <span class="wtag">Life</span>
+        </li>
+      </ul>
+    </section>
+
+    <!-- PHOTOS -->
+    <section class="section" id="photos">
+      <div class="sec-header">
+        <p class="sec-label" style="margin-bottom:0;">Photos I took and love</p>
+        <a href="/photos" class="sec-all">see all →</a>
+      </div>
+      <div class="photo-grid">
+        <a href="/photos" class="photo-cell"><img src="/photos/sunset-flag.jpg" alt="Sunset" loading="lazy" /><div class="photo-caption"><span>Gurgaon, rooftop</span></div><div class="photo-tag">Sunset</div></a>
+        <a href="/photos" class="photo-cell"><img src="/photos/sunset-plane.jpg" alt="Sunset" loading="lazy" /><div class="photo-caption"><span>35,000 ft</span></div><div class="photo-tag">Sunset</div></a>
+        <a href="/photos" class="photo-cell"><img src="/photos/sunset-city.jpg" alt="Sunset" loading="lazy" /><div class="photo-caption"><span>City at dusk</span></div><div class="photo-tag">Sunset</div></a>
+        <a href="/photos" class="photo-cell"><img src="/photos/sunset-3.jpg" alt="Sunset" loading="lazy" /><div class="photo-caption"><span>Somewhere in between</span></div><div class="photo-tag">Sunset</div></a>
+        <a href="/photos" class="photo-cell"><img src="/photos/sunset-4.jpg" alt="Sunset" loading="lazy" /><div class="photo-caption"><span>Golden hour</span></div><div class="photo-tag">Sunset</div></a>
+        <a href="/photos" class="photo-cell"><img src="/photos/sunset-5.jpg" alt="Sunset" loading="lazy" /><div class="photo-caption"><span>Last light</span></div><div class="photo-tag">Sunset</div></a>
+        <a href="/photos" class="photo-cell"><img src="/photos/sunset-6.jpg" alt="Sunset" loading="lazy" /><div class="photo-caption"><span>Painted sky</span></div><div class="photo-tag">Sunset</div></a>
+        <a href="/photos" class="photo-cell"><img src="/photos/sunset-7.jpg" alt="Sunset" loading="lazy" /><div class="photo-caption"><span>Before dark</span></div><div class="photo-tag">Sunset</div></a>
+        <a href="/photos" class="photo-cell"><img src="/photos/sunset-8.jpg" alt="Sunset" loading="lazy" /><div class="photo-caption"><span>Day ends</span></div><div class="photo-tag">Sunset</div></a>
+      </div>
+      <p class="photo-cta">These never made it to Instagram. <a href="/photos">Explore the full collection →</a></p>
+    </section>
+
+    <!-- CREATIVE -->
+    <section class="section">
+      <p class="sec-label">Creative side</p>
+      <div class="poster-grid">
+
+        <div class="poster-cell" style="background:#3E5F44;">
+          <p class="poster-text" style="color:#DDD6B9;">Build what<br>outlives <span style="color:#F47A1F;">luck.</span></p>
+        </div>
+
+        <div class="poster-cell" style="background:#DDD6B9;">
+          <p class="poster-text" style="color:#3E5F44;">Stop planning.<br><span style="color:#F47A1F;">Start breaking.</span></p>
+        </div>
+
+        <div class="poster-cell" style="background:#DDD6B9;">
+          <p class="poster-text" style="color:#3E5F44;">Execution beats<br>everything.<br><span style="color:#F47A1F;">Every time.</span></p>
+        </div>
+
+        <div class="poster-cell" style="background:#3E5F44;">
+          <p class="poster-text" style="color:#DDD6B9;">Prototype over idea.<br><span style="color:#F47A1F;">Always.</span></p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- MUSIC -->
+    <section class="section" style="padding-bottom:52px;">
+      <p class="sec-label">Music I love</p>
+      <a href="https://open.spotify.com/playlist/11BYNAVd6M1Qg0UYpLKbSR" target="_blank" rel="noreferrer" class="playlist-item">
+        <div class="pl-icon"><svg viewBox="0 0 24 24"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg></div>
+        <div><p class="pl-name">My Playlist</p><p class="pl-meta">open.spotify.com</p></div>
+      </a>
+    </section>
+  </div>
+
+  <footer class="page-footer">
+    <div class="footer-links"><a href="/writing">writing</a><a href="/photos">photos</a><a href="/me">/me</a></div>
+    <span class="footer-copy">sethi.si</span>
+  </footer>
+
+  <button class="theme-btn" id="theme-btn" title="Toggle dark mode">
+    <svg id="theme-icon" viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 0 1-4.4 2.26 5.403 5.403 0 0 1-3.14-9.8c-.44-.06-.9-.1-1.36-.1z"/></svg>
+  </button>
+
+  <script>
+    function tick(){var n=new Date(new Date().toLocaleString('en-US',{timeZone:'Asia/Kolkata'}));var h=n.getHours(),m=String(n.getMinutes()).padStart(2,'0');document.getElementById('clock').textContent=(h%12||12)+':'+m+(h>=12?' PM':' AM');}
+    tick();setInterval(tick,60000);
+    fetch('https://api.open-meteo.com/v1/forecast?latitude=28.4595&longitude=77.0266&current_weather=true').then(function(r){return r.json();}).then(function(d){document.getElementById('weather').textContent='\u2601 '+Math.round(d.current_weather.temperature)+'\u00b0C';}).catch(function(){});
+    fetch('https://open.spotify.com/oembed?url=https://open.spotify.com/track/0ny1jaCM7x9NO9RqJBclms').then(function(r){return r.json();}).then(function(d){document.getElementById('convo-song').textContent=d.title+(d.author_name?' \u2014 '+d.author_name:'');}).catch(function(){document.getElementById('convo-song').textContent='Open in Spotify';});
+    var dark=false,btn=document.getElementById('theme-btn'),icon=document.getElementById('theme-icon');
+    var SUN='<path d="M12 17a5 5 0 1 0 0-10 5 5 0 0 0 0 10zm0-15v2m0 16v2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>';
+    var MOON='<path d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 0 1-4.4 2.26 5.403 5.403 0 0 1-3.14-9.8c-.44-.06-.9-.1-1.36-.1z"/>';
+    btn.addEventListener('click',function(){dark=!dark;document.getElementById('root').classList.toggle('dark',dark);icon.innerHTML=dark?SUN:MOON;icon.setAttribute('fill',dark?'none':'currentColor');icon.setAttribute('stroke',dark?'currentColor':'none');icon.setAttribute('stroke-width',dark?'2':'0');});
+  </script>
+</body>
+</html>
